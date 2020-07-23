@@ -25,6 +25,11 @@ namespace RPizza.Server.Controllers
         }
 
 
+
+        /// <summary>
+        /// Metodo Get que obtiene el listado de Pizzas de la tabla Special
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<PizzaSpecial>>> GetSpecial()
         {
