@@ -1,7 +1,9 @@
 ﻿@import url('font/quicksand.css');
+
 html,body{
     height:100%;
 }
+
 body{
     padding-top:5rem;
     flex-direction:column;
@@ -16,6 +18,7 @@ body{
     background-color:white;
 
 }
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -33,4 +36,35 @@ body{
     position: absolute;
     right: 0.75rem;
     top: 0.5rem;
+}
+
+/*Loading*/
+
+.loading-bar{
+    position:absolute;
+    width:500px;
+    height:6px;
+    background-color:white;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,0.2);
+    top:calc(50% - 3px);
+    left:calc(50% - 250px);
+}
+
+.loading-bar::after{
+    content:'';
+    display:block;
+    width:200px;
+    height:100%;
+    background-color:#dc105a;
+    animation:progressbar-slide 1s infinite;
+    animation-timing-function:ease-in-out;
+}
+@keyframes progressbar-slide{
+    0%{
+        transform:translateX(-200px);
+    }
+    70%,100% {
+        transform:translateX(500px);
+    }
 }
