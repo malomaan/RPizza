@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPizza.Server", "RPizza\Server\RPizza.Server.csproj", "{E9401C3A-3A76-4E1B-86F6-874785E2EFB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPizza.Server", "RPizza\Server\RPizza.Server.csproj", "{E9401C3A-3A76-4E1B-86F6-874785E2EFB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPizza.Client", "RPizza\Client\RPizza.Client.csproj", "{85C6AF91-602A-4357-A5EC-C7BC12BD491C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPizza.Client", "RPizza\Client\RPizza.Client.csproj", "{85C6AF91-602A-4357-A5EC-C7BC12BD491C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPizza.Shared", "RPizza\Shared\RPizza.Shared.csproj", "{ED4052F9-2250-482F-B70B-160051CCD3D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPizza.Shared", "RPizza\Shared\RPizza.Shared.csproj", "{ED4052F9-2250-482F-B70B-160051CCD3D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
