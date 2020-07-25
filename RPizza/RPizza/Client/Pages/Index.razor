@@ -8,19 +8,25 @@
         {
             foreach (var Special in Specials)
             {
-                <li @onclick="@(()=> Console.WriteLine(Special.Name))" style="background-image:url('@Special.ImageUrl')">
-                        <div class="pizza-info">
-                            <span class="title" >@Special.Name</span>
-                            @Special.Description
-                            <span class="price">
-                                @Special.GetFormattedBasePrice()
-                            </span>
-                        </div>
+                <li @onclick="@(() => ShowConfigurePizzaGialog(Special))" style="background-image:url('@Special.ImageUrl')">
+                    <div class="pizza-info">
+                        <span class="title">@Special.Name</span>
+                        @Special.Description
+                        <span class="price">
+                            @Special.GetFormattedBasePrice()
+                        </span>
+                    </div>
                 </li>
             }
         }
     </ul>
 </div>
+
+@if (ShowingConfigureGialog)
+{
+    <ConfigurePizzaDialog Pizza="ConfiguringPizza" />
+}
+
 
 
 @code{
@@ -30,7 +36,10 @@
     /// </summary>
     List<PizzaSpecial> Specials;
 
-   
+    Pizza ConfiguringPizza;
+    bool ShowingConfigureGialog;
+
+
     /// <summary>
     /// Metodo que se carga cuando inicializa el Componente
     /// </summary>
@@ -39,6 +48,19 @@
     {
         Specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>("special");
     }
+
+    void ShowConfigurePizzaGialog(PizzaSpecial special)
+    {
+        ConfiguringPizza = new Pizza()
+        {
+            Special = special,
+            SpecialId = special.Id,
+            Size = Pizza.DefaultSize,
+            Toppings = new List<PizzaTopping>()
+        };
+        ShowingConfigureGialog = true;
+    }
+}
 
 
 }
