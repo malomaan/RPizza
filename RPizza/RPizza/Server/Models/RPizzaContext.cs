@@ -13,6 +13,17 @@ namespace RPizza.Server.Models
         {
         }
         public DbSet<PizzaSpecial> Special { get; set; }
+        public DbSet<Topping> Topping { get; set; }
+        public DbSet<Pizza> Pizza { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PizzaTopping>()
+                .HasKey(pst => new { pst.PizzaId, pst.ToppingId });
+            
+            modelBuilder.Entity<PizzaTopping>()
+                .HasOne<Pizza>().WithMany(ps => ps.Toppings);
+        }
+
 
     }
 }

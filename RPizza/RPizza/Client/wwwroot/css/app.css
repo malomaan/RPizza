@@ -1,24 +1,20 @@
 ﻿@import url('font/quicksand.css');
 
-html,body{
-    height:100%;
+html, body {
+    height: 100%;
 }
-
-body{
-    padding-top:5rem;
-    flex-direction:column;
-    font-family:Quicksand;
-    overflow-y:hidden;
+body {
+    padding-top: 5rem;
+    flex-direction: column;
+    font-family: Quicksand;
+    overflow-y: hidden;
 }
-
-.content{
-    display:flex;
-    height:100%;
-    z-index:1;
-    background-color:white;
-
+.content {
+    display: flex;
+    height: 100%;
+    z-index: 1;
+    background-color: white;
 }
-
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -30,45 +26,42 @@ body{
     width: 100%;
     z-index: 1000;
 }
-
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
 
 /*Loading*/
-
-.loading-bar{
-    position:absolute;
-    width:500px;
-    height:6px;
-    background-color:white;
-    overflow:hidden;
-    box-shadow:0 1px 3px rgba(0,0,0,0.2);
-    top:calc(50% - 3px);
-    left:calc(50% - 250px);
+.loading-bar {
+    position: absolute;
+    width: 500px;
+    height: 6px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    top: calc(50% - 3px);
+    left: calc(50% - 250px);
 }
-
-.loading-bar::after{
-    content:'';
-    display:block;
-    width:200px;
-    height:100%;
-    background-color:#dc105a;
-    animation:progressbar-slide 1s infinite;
-    animation-timing-function:ease-in-out;
-}
-@keyframes progressbar-slide{
-    0%{
-        transform:translateX(-200px);
+    .loading-bar::after {
+        content: '';
+        display: block;
+        width: 200px;
+        height: 100%;
+        background-color: #dc105a;
+        animation: progressbar-slide 1s infinite;
+        animation-timing-function: ease-in-out;
     }
+@keyframes progressbar-slide {
+    0% {
+        transform: translateX(-200px);
+    }
+
     70%,100% {
-        transform:translateX(500px);
+        transform: translateX(500px);
     }
 }
-
 /*Componentes y Layout*/
 .main {
     flex-grow: 1;
@@ -92,7 +85,7 @@ body{
         box-shadow: 0 3px 4px rgba(0,0,0,0.4);
         transition: 0.1s ease-out;
     }
-    .pizza-cards > li:hover {
+        .pizza-cards > li:hover {
             transform: scale(1.02);
         }
 .pizza-info {
@@ -135,7 +128,6 @@ body{
     font-size: 1.2rem;
     margin-right: 0.2rem;
 }
-
 /*Barra de Navegación*/
 .top-bar {
     height: 5rem;
@@ -152,12 +144,10 @@ body{
     left: 0;
     z-index: 1030;
 }
-
 .logo {
     margin-right: 3rem;
     width: 9rem;
 }
-
 .nav-tab {
     margin: 0;
     padding: 0.3rem 1.8rem;
@@ -173,36 +163,30 @@ body{
     text-transform: uppercase;
     transition: 0.2s ease-out;
 }
-
-.nav-tab:hover {
-    color: white;
-    text-decoration: none;
-    background-color: rgba(255,255,255,0.3);
-}
-
-.nav-tab.active {
-    background-color: rgba(255,255,255,0.2);
-    color: #fff2cc;
-}
-
-.nav-tab img {
-    height: 2rem;
-    margin-bottom: 0.25rem;
-}
-
-.nav-tab.active img {
-    filter: brightness(0) saturate(100%) invert(93%) sepia(18%) saturate(797%) hue-rotate(316deg) brightness(109%) contrast(101%);
-}
-
-.nav-tab.active:after {
-    content: "";
-    position: absolute;
-    bottom: -1rem;
-    z-index: 1;
-    width: 0px;
-    height: 0px;
-    border-left: 0.6rem solid transparent;
-    border-right: 0.6rem solid transparent;
-    border-top: 1rem solid rgb(205,51,51);
-}
-
+    .nav-tab:hover {
+        color: white;
+        text-decoration: none;
+        background-color: rgba(255,255,255,0.3);
+    }
+    .nav-tab.active {
+        background-color: rgba(255,255,255,0.2);
+        color: #fff2cc;
+    }
+    .nav-tab img {
+        height: 2rem;
+        margin-bottom: 0.25rem;
+    }
+    .nav-tab.active img {
+        filter: brightness(0) saturate(100%) invert(93%) sepia(18%) saturate(797%) hue-rotate(316deg) brightness(109%) contrast(101%);
+    }
+    .nav-tab.active:after {
+        content: "";
+        position: absolute;
+        bottom: -1rem;
+        z-index: 1;
+        width: 0px;
+        height: 0px;
+        border-left: 0.6rem solid transparent;
+        border-right: 0.6rem solid transparent;
+        border-top: 1rem solid rgb(205,51,51);
+    }
