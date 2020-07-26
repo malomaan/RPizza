@@ -24,7 +24,10 @@
 
 @if (ShowingConfigureGialog)
 {
-    <ConfigurePizzaDialog Pizza="ConfiguringPizza" />
+    <ConfigurePizzaDialog Pizza="ConfiguringPizza"
+                          OnCancel="CancelConfigurePizzaGialog"
+                          OnConfirm="ConfirmConfigurePizzaDialog"
+                          />
 }
 
 
@@ -38,6 +41,8 @@
 
     Pizza ConfiguringPizza;
     bool ShowingConfigureGialog;
+
+    Order Order = new Order();
 
 
     /// <summary>
@@ -60,7 +65,17 @@
         };
         ShowingConfigureGialog = true;
     }
-}
 
+    void CancelConfigurePizzaGialog()
+    {
+        ShowingConfigureGialog = false;
+    }
+
+    void ConfirmConfigurePizzaDialog()
+    {
+        Order.Pizzas.Add(ConfiguringPizza);
+        ConfiguringPizza = null;
+        ShowingConfigureGialog = false;
+    }
 
 }
