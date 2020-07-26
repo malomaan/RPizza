@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RPizza.Server.Models;
 
 namespace RPizza.Server.Migrations
 {
     [DbContext(typeof(RPizzaContext))]
-    partial class RPizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20200726001219_AddOrder")]
+    partial class AddOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace RPizza.Server.Migrations
 
             modelBuilder.Entity("RPizza.Shared.Order", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -65,7 +67,7 @@ namespace RPizza.Server.Migrations
                     b.Property<string>("UsrId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("DeliveryAddressId");
 

@@ -15,6 +15,10 @@ namespace RPizza.Server.Models
         public DbSet<PizzaSpecial> Special { get; set; }
         public DbSet<Topping> Toppings { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PizzaTopping>()
@@ -25,6 +29,9 @@ namespace RPizza.Server.Models
 
             modelBuilder.Entity<PizzaTopping>()
                 .HasOne(pst => pst.Topping).WithMany();
+
+            modelBuilder.Entity<Order>()
+                .OwnsOne(o => o.DeliveryLocation);
         }
 
 
