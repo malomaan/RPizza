@@ -41,7 +41,6 @@
 
     Pizza ConfiguringPizza;
     bool ShowingConfigureGialog;
-
     Order Order = new Order();
 
 
@@ -68,6 +67,7 @@
 
     void CancelConfigurePizzaGialog()
     {
+        ConfiguringPizza = null;
         ShowingConfigureGialog = false;
     }
 

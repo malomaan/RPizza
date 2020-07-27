@@ -45,7 +45,6 @@
                     </select>
                 }
             </div>
-
             <div class="toppings">
                 @foreach(var Topping in Pizza.Toppings)
                 {
@@ -85,12 +84,11 @@
         Toppings = await HttpClient.GetFromJsonAsync<List<Topping>>("toppings");
     }
 
-
     [Parameter]
     public EventCallback OnCancel { get; set; }
+
     [Parameter]
     public EventCallback OnConfirm { get; set; }
-
 
     void AddTopping(Topping topping)
     {
@@ -99,7 +97,6 @@
             Pizza.Toppings.Add(new PizzaTopping{Topping = topping});
         }
     }
-
 
     void ToppingSelected(ChangeEventArgs e)
     {
