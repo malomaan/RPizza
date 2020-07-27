@@ -14,8 +14,8 @@ namespace RPizza.Server.Models
         }
         public DbSet<PizzaSpecial> Special { get; set; }
         public DbSet<Topping> Toppings { get; set; }
-        public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Pizza> Pizzas { get; set; }
 
 
 

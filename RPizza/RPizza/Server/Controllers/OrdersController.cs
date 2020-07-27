@@ -25,14 +25,15 @@ namespace RPizza.Server.Controllers
         public async Task<ActionResult<int>> PlaceOrder(Order order)
         {
             order.CreatedTime = DateTime.Now;
-            order.DeliveryLocation =new LatLong(19.043679206924864, -98.19811254438645);
+            order.DeliveryLocation =
+                new LatLong(19.043679206924864, -98.19811254438645);
             foreach (var pizza in order.Pizzas)
             {
                 pizza.SpecialId = pizza.SpecialId;
                 pizza.Special = null;
                 foreach (var topping in pizza.Toppings)
                 {
-                    topping.ToppingId = topping.ToppingId;
+                    topping.ToppingId = topping.Topping.Id;
                     topping.Topping = null;
                 }
             }
