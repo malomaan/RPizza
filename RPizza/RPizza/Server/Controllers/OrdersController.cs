@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RPizza.Server.Models;
 using RPizza.Shared;
 
@@ -41,5 +42,17 @@ namespace RPizza.Server.Controllers
             await Context.SaveChangesAsync();
             return order.OrderId;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<List<OrderWithStatus>>> GetOrders()
+        {
+            var Orders = await Context.Orders
+                .Include(o => o.DeliveryLocation)
+                .Include(o => o.Pizzas).ThenInclude(p => p.Special)
+                .Include(o => o.Pizzas).ThenInclude(p => p.Toppings).ThenInclude(t => t.Topping)
+                .OrderByDescending(o => o.CreatedTime).ToListAsync();
+            return Orders.Select(o => OrderWithStatus.FromOrder(o)).ToList();
+        }
+      
     }
 }
