@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPizza.Client", "RPizza\Cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPizza.Shared", "RPizza\Shared\RPizza.Shared.csproj", "{ED4052F9-2250-482F-B70B-160051CCD3D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPizza.ComponentsLibrary", "RPizza.ComponentsLibrary\RPizza.ComponentsLibrary.csproj", "{448B9CB7-AE20-4BED-BAC0-450CEFDE73FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPizza.ComponentsLibrary", "RPizza.ComponentsLibrary\RPizza.ComponentsLibrary.csproj", "{448B9CB7-AE20-4BED-BAC0-450CEFDE73FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
