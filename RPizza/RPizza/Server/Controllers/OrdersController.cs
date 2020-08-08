@@ -53,6 +53,26 @@ namespace RPizza.Server.Controllers
                 .OrderByDescending(o => o.CreatedTime).ToListAsync();
             return Orders.Select(o => OrderWithStatus.FromOrder(o)).ToList();
         }
-      
+
+        [HttpGet("{orderID}")]
+        public async Task<ActionResult<OrderWithStatus>> GetOrderWithStatus(int orderId)
+        {
+            var Orders = await Context.Orders
+                .Where(o => o.OrderId == orderId)
+                .Include(o => o.DeliveryLocation)
+                .Include(o => o.Pizzas).ThenInclude(p => p.Special)
+                .Include(o => o.Pizzas).ThenInclude(p => p.Toppings)
+                .ThenInclude(t => t.Topping)
+                .SingleOrDefaultAsync();
+            if (Orders == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return OrderWithStatus.FromOrder(Orders);
+            }
+        }
+
     }
 }
