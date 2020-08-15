@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPizza.Client.Services
 {
+    //*Patron APP State
     public class OrderState //AppState
     {
         public Pizza ConfiguringPizza { get; private set; }
