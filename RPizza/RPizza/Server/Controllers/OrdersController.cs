@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RPizza.Server.Models;
 using RPizza.Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RPizza.Server.Controllers
 {
     [Route("orders")]
     [ApiController]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
 

@@ -8,6 +8,10 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using RPizza.Server.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Twitter;
+using Microsoft.AspNetCore.Http;
 
 namespace RPizza.Server
 {
@@ -30,6 +34,27 @@ namespace RPizza.Server
             });
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme =
+                CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+             .AddCookie()
+             .AddTwitter(twitterOptions =>
+             {
+                 twitterOptions.ConsumerKey =
+     "U9DbAaVcDPYO3RVFlDo4w";
+                 twitterOptions.ConsumerSecret =
+     "l6HWZa8F5MJmbBkGSzL6gMjgZMererT5KROxAzws9o";
+                 twitterOptions.Events.OnRemoteFailure = (context) =>
+                 {
+                     context.HandleResponse();
+                     return context.Response.WriteAsync(
+          "<script>window.close();</script>");
+                 };
+             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +77,9 @@ namespace RPizza.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

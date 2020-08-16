@@ -4,19 +4,30 @@
 @inject HttpClient HttpClient
 
 <div class="main">
-
-    <div class="checkout-cols">
-        <div class="checkout-order-details">
-            <h4>Revisar la Orden</h4>
-            <OrderReview Order="OrderState.Order"/>
+    <EditForm Model="OrderState.Order.DeliveryAddress" OnValidSubmit="PlaceOrder">
+        <div class="checkout-cols">
+            <div class="checkout-order-details">
+                <h4>Esta es la Orden</h4>
+                <OrderReview Order="OrderState.Order" />
+            </div>
+            <div>
+                <h4>Información para Enviar la Orden</h4>
+                <AddressEditor Address="OrderState.Order.DeliveryAddress" />
+            </div>
         </div>
-    </div>
-    <button class="checkout-button btn btn-warning" @onclick="PlaceOrder">Aceptar Orden</button>
+        <button type="submit" disabled="@habilitar" class="checkout-button btn btn-warning">Aceptar Orden</button>
+        <DataAnnotationsValidator/>
+    </EditForm>
 </div>
 
+
 @code {
+
+    bool habilitar = false;
+
     async Task PlaceOrder()
     {
+        habilitar = true;
         var Response = await HttpClient.PostAsJsonAsync("orders", OrderState.Order);
         var NewOrderId = await Response.Content.ReadFromJsonAsync<int>();
         OrderState.ResetOrder();
