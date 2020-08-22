@@ -2,7 +2,8 @@
 @inject HttpClient HttpClient;
 @inject NavigationManager NavigationManager
 @inject OrderState OrderState
- 
+@inject IJSRuntime JSRuntime
+
 
 <div class="main">
     <ul class="pizza-cards">
@@ -26,14 +27,17 @@
 <div class="sidebar">
     @if (OrderState.Order.Pizzas.Any())
     {
-        <div class="order-contents">
-            <h2>Tu Orden</h2>
-            @foreach (var ConfiguredPizza in OrderState.Order.Pizzas)
-            {
-                <ConfiguredPizzaItem Pizza="ConfiguredPizza"
-                                     OnRemoved="@(()=>OrderState.RemoveConfiguredPizza(ConfiguredPizza))"></ConfiguredPizzaItem>
-            }
-        </div>
+    <div class="order-contents">
+        <h2>Tu Orden</h2>
+        @foreach (var ConfiguredPizza in OrderState.Order.Pizzas)
+        {
+            <ConfiguredPizzaItem Pizza="ConfiguredPizza"
+                                 OnRemoved="@(() => RemovePizza(ConfiguredPizza))" />
+
+            @*<ConfiguredPizzaItem Pizza="ConfiguredPizza"
+                                 OnRemoved="@(()=>OrderState.RemoveConfiguredPizza(ConfiguredPizza))"></ConfiguredPizzaItem>*@
+        }
+    </div>
     }
     else
     {
@@ -42,11 +46,12 @@
         </div>
     }
 
-    <div class="order-total @(OrderState.Order.Pizzas.Any() ? "" : "hidden")">
+    @*    <div class="order-total @(OrderState.Order.Pizzas.Any() ? "" : "hidden")">    *@
+    <div class="order-total">
         Total:
         <span class="total-price">@OrderState.Order.GetFormattedTotalPrice()</span>
         <a href="checkout" class="@(OrderState.Order.Pizzas.Count == 0 ? "btn btn-warning disabled" : "btn btn-warning")">
-            Order >
+            Order>
         </a>
     </div>
 
@@ -59,8 +64,7 @@
 {
     <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza"
                           OnCancel="OrderState.CancelConfigurePizzaGialog"
-                          OnConfirm="OrderState.ConfirmConfigurePizzaDialog"
-                          />
+                          OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
 }
 
 
@@ -84,5 +88,14 @@
         Specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>("special");
     }
 
-  
+
+    async Task RemovePizza(Pizza configuredPizza)
+    {
+        if (await JSRuntime.Confirm(
+        $"¿Eliminar la pizza {configuredPizza.Special.Name} de la orden?"))
+        {
+            OrderState.RemoveConfiguredPizza(configuredPizza);
+        }
+    }
+
 }

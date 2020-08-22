@@ -16,12 +16,14 @@
                         <h4>Esta es la Orden</h4>
                         <OrderReview Order="OrderState.Order" />
                     </div>
-                    <div>
+                    <div  @onmousemove="ColocarFofo" >
                         <h4>Información para Enviar la Orden</h4>
-                        <AddressEditor Address="OrderState.Order.DeliveryAddress" />
+                        <AddressEditor Address="OrderState.Order.DeliveryAddress"/>
                     </div>
                 </div>
                 <button type="submit" disabled="@habilitar" class="checkout-button btn btn-warning">Aceptar Orden</button>
+                <button type="button" @onclick="ColocarFofo">Foco</button>
+                <button type="button"@onmousemove="ColocarFofo"  @onclick="ColocarFofo">Foco</button>
                 <DataAnnotationsValidator />
             </EditForm>
         </Authorized>
@@ -33,6 +35,7 @@
 
     [CascadingParameter]
     Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
 
 
     protected override async Task OnInitializedAsync()
@@ -61,6 +64,9 @@
                 NavigationManager.NavigateTo("");
             }
         }
+
+        Focus("Name");
+
     }
 
 
@@ -73,6 +79,22 @@
         var NewOrderId = await Response.Content.ReadFromJsonAsync<int>();
         OrderState.ResetOrder();
         NavigationManager.NavigateTo($"myorders/{NewOrderId}");
+
     }
+
+    async Task ColocarFofo()
+    {
+        Focus("Name");
+        //await IJSRuntime.InvokeVoidAsync("focusonId", "Name");
+
+        //await IJSRuntime.InvokeVoidAsync("jsfunction.focusElement", "txt_name");
+    }
+
+    async void Focus(string controlId)
+    {
+        var obj = IJSRuntime.InvokeAsync<string>(
+            "MySetFocus", controlId);
+    }
+
 
 }

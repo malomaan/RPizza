@@ -30,6 +30,7 @@ namespace RPizza.Server.Controllers
             order.CreatedTime = DateTime.Now;
             order.DeliveryLocation =
                 new LatLong(19.043679206924864, -98.19811254438645);
+            order.UsrId = GetUserId();
             foreach (var pizza in order.Pizzas)
             {
                 pizza.SpecialId = pizza.SpecialId;
@@ -48,7 +49,7 @@ namespace RPizza.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<OrderWithStatus>>> GetOrders()
         {
-            var Orders = await Context.Orders
+            var Orders = await Context.Orders .Where(o =>o.UsrId== GetUserId())
                 .Include(o => o.DeliveryLocation)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Special)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Toppings).ThenInclude(t => t.Topping)
@@ -59,7 +60,7 @@ namespace RPizza.Server.Controllers
         [HttpGet("{orderID}")]
         public async Task<ActionResult<OrderWithStatus>> GetOrderWithStatus(int orderId)
         {
-            var Orders = await Context.Orders
+            var Orders = await Context.Orders.Where(o => o.UsrId == GetUserId())
                 .Where(o => o.OrderId == orderId)
                 .Include(o => o.DeliveryLocation)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Special)
@@ -75,6 +76,16 @@ namespace RPizza.Server.Controllers
                 return OrderWithStatus.FromOrder(Orders);
             }
         }
+
+        [HttpGet]
+        private string GetUserId()
+        {
+            return HttpContext.User.FindFirst(
+           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")?.Value;
+        }
+
+
+
 
     }
 }

@@ -2,6 +2,8 @@
 @inject HttpClient HttpClient
 @using System.Threading;
 @implements IDisposable
+@attribute [Authorize]
+
 
 <div class="main">
     @if (InvalidOrder)
@@ -17,8 +19,9 @@
     {
         <div class="track-order">
             <div class="track-order-title">
-                <h2>Pedido Realizado
-                @OrderWithStatus.Order.GetFormattedCreatedTime()
+                <h2>
+                    Pedido Realizado
+                    @OrderWithStatus.Order.GetFormattedCreatedTime()
                 </h2>
                 <p class="ml-auto mb-0">
                     Estatus: <strong>@OrderWithStatus.StatusText</strong>
@@ -26,10 +29,13 @@
             </div>
             <div class="track-order-body">
                 <div class="track-order-details">
-                    <OrderReview Order="OrderWithStatus.Order"/>
+                    <OrderReview Order="OrderWithStatus.Order" />
+                </div>
+                <div class="track-order-map">
+                    <Map Markers="OrderWithStatus.MapMarkers" />
                 </div>
             </div>
-        </div>
+       </div>
     }
 
 </div>

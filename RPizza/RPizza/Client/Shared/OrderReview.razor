@@ -1,4 +1,4 @@
-﻿@foreach(var Pizza in Order.Pizzas)
+﻿@foreach (var Pizza in Order.Pizzas)
 {
     <p>
         <strong>
@@ -8,24 +8,25 @@
         </strong>
     </p>
     <ul>
-        @foreach(var Topping in Pizza.Toppings)
+        @foreach (var Topping in Pizza.Toppings)
         {
             <li>
                 + @Topping.Topping.Name
             </li>
         }
     </ul>
+    <p>
+        <strong class="pricevw">
+            Precio Total: $@Order.GetFormattedTotalPrice()
+        </strong>
+    </p>
+
 }
-<p>
-    <strong class="pricevw">
-        Precio Total: $@Order.GetFormattedTotalPrice()
-    </strong>
-</p>
 
 
 @code {
-    
+
     [Parameter]
-    public Order Order{ get; set; }
+    public Order Order { get; set; }
 
 }
