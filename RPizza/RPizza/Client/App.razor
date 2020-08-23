@@ -1,14 +1,14 @@
-<CascadingAuthenticationState>
+﻿<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData"
                                 DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
                     <div class="main">
-                        <h2>No has iniciado sesi&oacute;n.</h2>
-                        <p>Para continuar, por favor inicia sesi&oacute;n.</p>
+                        <h2>No has iniciado sesión.</h2>
+                        <p>Para continuar, por favor inicia sesión.</p>
                         <a class="btn btn-danger"
-                           href="user/signin">Iniciar sesi&oacute;n.</a>
+                           href="user/signin">Iniciar sesión.</a>
                     </div>
                 </NotAuthorized>
                 <Authorizing>
