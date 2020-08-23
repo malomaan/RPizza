@@ -16,14 +16,14 @@
                         <h4>Esta es la Orden</h4>
                         <OrderReview Order="OrderState.Order" />
                     </div>
-                    <div  @onmousemove="ColocarFofo" >
+                    <div>
                         <h4>Información para Enviar la Orden</h4>
                         <AddressEditor Address="OrderState.Order.DeliveryAddress"/>
                     </div>
                 </div>
                 <button type="submit" disabled="@habilitar" class="checkout-button btn btn-warning">Aceptar Orden</button>
                 <button type="button" @onclick="ColocarFofo">Foco</button>
-                <button type="button"@onmousemove="ColocarFofo"  @onclick="ColocarFofo">Foco</button>
+                <button type="button" @onclick="ColocarFofo">Foco</button>
                 <DataAnnotationsValidator />
             </EditForm>
         </Authorized>
