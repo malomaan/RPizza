@@ -22,8 +22,6 @@
                     </div>
                 </div>
                 <button type="submit" disabled="@habilitar" class="checkout-button btn btn-warning">Aceptar Orden</button>
-                <button type="button" @onclick="ColocarFofo">Foco</button>
-                <button type="button" @onclick="ColocarFofo">Foco</button>
                 <DataAnnotationsValidator />
             </EditForm>
         </Authorized>
@@ -36,6 +34,21 @@
     [CascadingParameter]
     Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            //await IJSRuntime.InvokeVoidAsync("jsfunction.focusElement", "Name");
+
+            //await IJSRuntime.InvokeVoidAsync("MySetFocus", "Name");
+
+            await IJSRuntime.InvokeVoidAsync("focusonId", "Name");
+            
+
+
+        }
+    }
 
 
     protected override async Task OnInitializedAsync()
@@ -65,8 +78,6 @@
             }
         }
 
-        Focus("Name");
-
     }
 
 
@@ -81,20 +92,5 @@
         NavigationManager.NavigateTo($"myorders/{NewOrderId}");
 
     }
-
-    async Task ColocarFofo()
-    {
-        Focus("Name");
-        //await IJSRuntime.InvokeVoidAsync("focusonId", "Name");
-
-        //await IJSRuntime.InvokeVoidAsync("jsfunction.focusElement", "txt_name");
-    }
-
-    async void Focus(string controlId)
-    {
-        var obj = IJSRuntime.InvokeAsync<string>(
-            "MySetFocus", controlId);
-    }
-
 
 }

@@ -1,9 +1,9 @@
-﻿//function focusById(elementId) {
-//    var element = document.getElementById(elementId);
-//    if (element) {
-//        element.focus();
-//    }
-//}
+﻿function focusById(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) {
+        element.focus();
+    }
+}
 
 
 function focusonId(elementId) {
@@ -14,7 +14,12 @@ function focusonId(elementId) {
 }
 
 
-window.jsfunction = { focusElement: function (id) { const element = document.getElementById(id); element.focus(); } }
+window.jsfunction = {
+    focusElement: function (id) {
+        const element = document.getElementById(id);
+        element.focus();
+    }
+}
 
 
 function Foco(x) {

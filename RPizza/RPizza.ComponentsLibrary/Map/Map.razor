@@ -1,5 +1,4 @@
-﻿@using Microsoft.JSInterop
-@inject IJSRuntime JSRuntime
+﻿@inject IJSRuntime JSRuntime
 
 <div id="@ElementId"style="height: 100%; width: 100%;">
 
@@ -11,6 +10,8 @@
     public double Zoom { get; set; }
     [Parameter]
     public List<Marker> Markers { get; set; }
+    
+    
     string ElementId = $"map-{Guid.NewGuid().ToString()}";
 
 

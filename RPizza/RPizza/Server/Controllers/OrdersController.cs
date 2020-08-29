@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using RPizza.Server.Models;
 using RPizza.Shared;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using RPizza.Server.Helpers;
 
 namespace RPizza.Server.Controllers
 {
@@ -29,7 +31,7 @@ namespace RPizza.Server.Controllers
         {
             order.CreatedTime = DateTime.Now;
             order.DeliveryLocation =
-                new LatLong(19.043679206924864, -98.19811254438645);
+                new LatLong(8.957901, -75.839130);
             order.UsrId = GetUserId();
             foreach (var pizza in order.Pizzas)
             {
@@ -77,13 +79,26 @@ namespace RPizza.Server.Controllers
             }
         }
 
+        //[HttpGet]
+        //private string GetUserId()
+        //{
+        //    return HttpContext.User.FindFirst(
+        //   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")?.Value;
+        //}
+
+        //[HttpGet]
+        //private string GetUserId()=> HttpContext.User.FindFirst(
+        //   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")?.Value;
+        //}
+
         [HttpGet]
         private string GetUserId()
         {
-            return HttpContext.User.FindFirst(
-           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")?.Value;
-        }
 
+            //return HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            //Se optiene de una funcion helper para no repetir en topdo el proyecto
+            return Helpers.User.GetUserId(HttpContext);
+        }
 
 
 
